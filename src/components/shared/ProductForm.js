@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import { Form, Container, Button } from 'react-bootstrap'
-import Axios from 'axios'
 
 const ProductForm = (props) => {
     const {product, handleChange, handleSubmit, heading} = props
@@ -45,6 +44,13 @@ const ProductForm = (props) => {
                         placeholder="Number in Stock"
                         value={product.stock}
                         name='stock'
+                        onChange={handleChange}
+                    />
+                <Form.Label>Picture of Product</Form.Label>
+                    <Form.Control
+                        type='url'   
+                        value={product.image}
+                        name='image'
                         onChange={handleChange}
                     />
                 <Button type='submit'>Submit</Button>

@@ -6,16 +6,6 @@ export const getAllProducts = () => {
     return axios(`${apiUrl}/products`)
 }
 
-//GET -> MINE index
-export const getMyProducts = (user) => {
-    return axios({
-        url:`${apiUrl}/products/mine`,
-        method: 'GET',
-        headers: {
-            Authorization:`Token token=${user.token}`
-        }
-    })
-}
 
 // GET -> Electronics category
 export const getAllElectronics = () => {
@@ -37,6 +27,7 @@ export const getAllCartItems = () => {
     return axios(`${apiUrl}/orders`)
 }
 
+
 // GET -> Checkout
 export const getAllCheckoutItems = () => {
     return axios(`${apiUrl}/checkout`)
@@ -45,6 +36,17 @@ export const getAllCheckoutItems = () => {
 // GET -> Show function
 export const getOneProduct = (productId) => {
     return axios(`${apiUrl}/products/${productId}`)
+}
+
+//GET -> MINE index
+export const getMyProducts = (user) => {
+    return axios({
+        url:`${apiUrl}/products/mine`,
+        method: 'GET',
+        headers: {
+            Authorization:`Token token=${user.token}`
+        }
+    })
 }
 
 // POST -> Create function
@@ -73,13 +75,12 @@ export const updateProduct = (user, updatedProduct) => {
 
 // DELETE -> Remove function
 export const removeProduct = (user, productId) => {
-    return(axios({
+    return axios({
         url: `${apiUrl}/products/${productId}`,
         method: 'DELETE',
         headers: {
             Authorization: `Token token=${user.token}`
-        },
-        data: { product: '' }
-    }))
+        }
+    })
 }
 

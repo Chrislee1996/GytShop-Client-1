@@ -1,9 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { getOneProduct } from "../../api/products";
+import { getOneProduct, updateProduct, removeProduct} from "../../api/products";
 import { Spinner, Container, Card, Button, Form } from "react-bootstrap";
+import EditProductsModal from './EditProductsModal'
+
 
 const ShowProduct = (props) => {
+    const [modalOpen, setModalOpen] = useState(false)
+    const [updated, setUpdated] = useState(false)
     const [product, setProduct] = useState(null)
     const {productId} = useParams()
     const { user, msgAlert } = props
@@ -19,9 +23,28 @@ const ShowProduct = (props) => {
         getOneProduct(productId)
             .then( res => setProduct(res.data.product))
             .catch(console.error)
-    }, [productId])
+    }, [updated])
 
     // console.log('product: ', product)
+    const deleteProduct = () => {
+        removeProduct(user, product.id)
+        .then(() => {
+            msgAlert({
+                heading: 'Product Removed!',
+                message: 'Product Successfully deleted',
+                variant: 'success',
+            })
+        })
+            .then(()=> {navigate('/')})
+            .catch(() => {
+                msgAlert({
+                    heading: 'Something Went Wrong',
+                    message: 'Unable to delete',
+                    variant: 'danger',
+                })
+            })
+    }
+
 
     const handleChange = (e) => {
         e.persist()
@@ -74,12 +97,21 @@ const ShowProduct = (props) => {
 
     return(
         <>
+            <Button onClick={() => setModalOpen(true)} className="m-2" variant="warning">
+                Edit Product
+            </Button>
+
+            <Button onClick={() => deleteProduct()} className="m-2" variant="danger">
+                Delete Product
+            </Button>
             <Container>
                 <h3><b>{product.name}</b></h3>
+                <Card style={{width:'18rem'}}>
                 <Card.Img
                     src={product.image}
-                    alt='product image'
+                    alt='product image' 
                 />
+                </Card>
                 <p>${product.price}</p>
                 <p>In-stock: {product.stock}</p>
                 <p>{product.description}</p>
@@ -95,6 +127,14 @@ const ShowProduct = (props) => {
                     <Button className="m-2" variant="primary" type='submit'>Add To Cart</Button>
                 </Form>
             </Container>
+            <EditProductsModal
+                    product={product}
+                    show={modalOpen}
+                    user={user}
+                    triggerRefresh={() => setUpdated(prev => !prev)}
+                    updateProduct={updateProduct}
+                    handleClose={() => setModalOpen(false)}
+                />
         </>
     )
 }

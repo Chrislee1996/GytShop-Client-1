@@ -68,6 +68,7 @@ const IndexProducts = (props) => {
 				<Dropdown.Item><Link to='/products/electronics' style={categoryLinks}>Electronics</Link></Dropdown.Item>
 				<Dropdown.Item><Link to='/products/collectibles' style={categoryLinks}>Collectibles</Link></Dropdown.Item>
 			</DropdownButton>
+            
             <div style={cardContainerLayout}>
                 {productCards}
             </div>
