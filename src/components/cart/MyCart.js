@@ -22,7 +22,9 @@ const MyCart = (props) => {
             })
             .catch(console.error)
     }, [userId])
-    console.log('this is the user id: ', userId)
+
+
+    console.log('this is the user in the cart id: ', userId)
     console.log('these are the products', products)
     console.log('this is the user\'s token', user.token)
 
@@ -63,7 +65,7 @@ const MyCart = (props) => {
                             />
                         </Link>
                         <Card.Text>
-                            <Button href={`/products/${product._id}`}>View {product.name}</Button>
+                            <Button Link to={`/products/${product._id}`}>View {product.name}</Button>
                         </Card.Text>
                     </Card.Body>
                 </Card>
@@ -74,12 +76,13 @@ const MyCart = (props) => {
     return (
         <>
             <h3>My Shopping Cart</h3>
+            <Button Link to>Check out</Button>
             <div style={cardContainerLayout}>
                 {productCards}
             </div>
             <p style={cardContainerLayout}>Total: ${totalPrice}</p>
         </>
-    )
+    )       
 }
 
 export default MyCart
