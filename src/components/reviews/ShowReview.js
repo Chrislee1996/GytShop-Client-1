@@ -1,15 +1,10 @@
 import React, { useState } from 'react'
 import { Card, Button } from 'react-bootstrap'
 import { removeReview } from '../../api/reviews'
-import EditProductsModel from '../products/EditProductsModel'
-import EditReviewModal from './EditReviewModal'
 
 const ShowReview = (props) => {
-    // most of these are simply to pass to edit modal
     const {review, user, product, triggerRefresh} = props
-    const [reviewOwner, setReviewOwner] = useState(null)
-    const [showEditModal ,setShowEditModal] = useState(false)
-    const [showResults, setShowResults] = React.useState(false)
+
 
 
 
@@ -36,23 +31,12 @@ const ShowReview = (props) => {
                     <Button onClick={()=> destroyReview()}variant="outline-danger" size='sm'>
                         Delete Review    
                     </Button>
-                    <Button onClick={()=> setShowEditModal(true)}variant="outline-warning" size='sm'>
-                        Edit Review    
-                    </Button>
                     </>
         :
         null
         }
         </Card.Body>
     </Card>
-    <EditReviewModal
-        user={user}
-        product={product}   
-        review={review}
-        show={showEditModal}
-        handleClose={() => setShowEditModal(false)}
-        triggerRefresh={triggerRefresh}
-    />
     </>
     )
 }
