@@ -145,8 +145,8 @@ const ShowProduct = (props) => {
                         :
                         <button className="signInB" type='submit'>Add To Cart</button>
                         }
-                        <button className="reviewB" onClick={()=> setReviewModalOpen(true)}> Leave a Review</button>
                     </Form>
+                    <button className="reviewB" onClick={()=> setReviewModalOpen(true)}> Leave a Review</button>
             </Container>
             
             <h3>Reviews: </h3>
