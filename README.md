@@ -1,5 +1,10 @@
 # Team 7 - Team Green Street Hooligans
-## GytShop (name in progress)
+## GytShop
+
+## Link to app
+
+> https://gogytshop.herokuapp.com/
+
 ## User Story
 >* As a user, I want to be directed to the website and be able to browse different categories while also being able to see different products on the page.
 >* As a user, I want to be able to sign-up or sign-in with a e-mail and password while also being able to sign-out.
